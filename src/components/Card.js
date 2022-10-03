@@ -8,7 +8,7 @@ const suitMap = {
   diamonds: '♦️',
 };
 
-export default function Card({ player, card }) {
+export default function Card({ player, card, canBeSelected }) {
   const { setFrom, setSelectedCard, selectedCard } = useGame();
 
   function handleCardClick() {
@@ -16,8 +16,10 @@ export default function Card({ player, card }) {
     setSelectedCard(card);
   }
 
-  // if there IS a selected card, and it has the same value and suit as THIS card, style it differently
-  const thisIsTheSelectedCard = selectedCard && selectedCard.value === card.value && selectedCard.suit === card.suit;
+  // if this card can selected and this card has the same value as the selected card, style it differently
+  const thisIsTheSelectedCard = canBeSelected && selectedCard
+    ? selectedCard.value === card.value && selectedCard.suit === card.suit
+    : false;
 
   return (
     <div className={`${thisIsTheSelectedCard ? 'selected' : ''} card`}

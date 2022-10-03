@@ -9,6 +9,7 @@ export default function CardList({ player, cards }) {
           key={card.suit + card.value}
           player={player}
           card={card}
+          canBeSelected
         />
       ))}
     </div>
